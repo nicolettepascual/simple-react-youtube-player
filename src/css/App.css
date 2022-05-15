@@ -1,13 +1,9 @@
 html, body {
-  padding: 0;
+  height: 100vh;
   margin: 0;
-  background-color: #124074;
+  background-color: #124074 !important;
 }
 
-.root {
-  height: 100vh;
-}
-
-.App {
-  height: 100vh;
+#app {
+  min-height: 100%; 
 }
