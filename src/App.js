@@ -1,5 +1,9 @@
+import React, { useState } from "react";
 import './css/App.css';
+
 import YoutubeContainer from "./components/YoutubeContainer";
+import InteractiveColumn from "./components/InteractiveColumn";
+
 import styled from 'styled-components';
 
 const Grid = styled.div`
@@ -15,14 +19,23 @@ const Col = styled.div`
 `
 
 function App() {
+  const [youtubeVidId, setYoutubeVideoId] = useState('q_rxsPa_YCk')
+
+  const onButtonPress = (e) => {
+    console.log(e)
+    setYoutubeVideoId(e)
+  }
+
   return (
     <div className="App">
       <Grid>
         <Row>
-          <Col size={20}>
-            <YoutubeContainer embedId="Q2G53LuEUaU" />
+          <Col size={20} style={{ padding: 20, backgroundColor: '#8ea9c4' }}>
+            <YoutubeContainer embedId={youtubeVidId} />
           </Col>
-          <Col size={4} style={{ border: '5px solid yellow' }}>Column</Col>
+          <Col size={4} style={{ display: 'flex', alignItems: 'end' }}>
+            <InteractiveColumn onButtonPress={onButtonPress} />
+          </Col>
         </Row>
       </Grid>
     </div>

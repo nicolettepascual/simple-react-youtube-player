@@ -7,8 +7,6 @@ const YoutubeWrapper = styled.div`
     padding-bottom: 56.25%;
     overflow: hidden;
     height: 0;
-    background-color: #8ea9c4;
-    border: 5px solid red;
 `
 
 const YoutubeIframe = styled.iframe`
@@ -17,7 +15,6 @@ const YoutubeIframe = styled.iframe`
     height: 100%;
     width: 100%;
     position: absolute;
-    padding: 20px;
 `
 
 
