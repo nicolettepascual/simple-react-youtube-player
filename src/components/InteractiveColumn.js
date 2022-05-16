@@ -1,5 +1,8 @@
 import React, { useState } from "react";
-import styled from 'styled-components';
+
+import styled, { keyframes } from 'styled-components';
+
+import { fadeOutUp } from 'react-animations';
 import { FaThumbsDown, FaThumbsUp } from "react-icons/fa";
 
 const StyledParentDiv = styled.div`
@@ -20,6 +23,8 @@ const StyledChangeButton = styled.button`
     border: 0;
     background-color: #8ea9c4;
     width: 70%;
+    float: right;
+    margin-right: 10px;
 `
 
 const StyledTextSpan = styled.span`
@@ -29,21 +34,39 @@ const StyledTextSpan = styled.span`
 
 const StyledIconBtnDiv = styled.div`
     color: white;
-    font-size: 45px;
+    font-size: 50px;
     margin-bottom: 30px;
+    margin-left: 30px;
     display: flex;
     justify-content: space-around;
     align-items: center;
 `
 
+const fadeOutUpAnimation = keyframes`${fadeOutUp}`;
+const StyledIconBtnSpan = styled.span`
+    animation: 1s ${props => (props.fadeOutUp || props.fadeOutDown ? fadeOutUpAnimation : "")};
+`
+
 const InteractiveColumn = (props) => {
     const [videoId, setVideoId] = useState('')
+    const [fadeOutUp, setFadeOutUp] = useState(false)
+    const [fadeOutDown, setFadeOutDown] = useState(false)
 
     return (
         <StyledParentDiv>
             <StyledIconBtnDiv>
-                <FaThumbsUp onClick={() => alert("thumbs up clicked")} />
-                <FaThumbsDown onClick={() => alert("thumbs down clicked")} />
+                <StyledIconBtnSpan 
+                onClick={() => setFadeOutUp(true)} 
+                onAnimationEnd={() => setFadeOutUp(false)}
+                fadeOutUp={fadeOutUp}>
+                    <FaThumbsUp />
+                </StyledIconBtnSpan>
+                <StyledIconBtnSpan 
+                onClick={() => setFadeOutDown(true)} 
+                onAnimationEnd={() => setFadeOutDown(false)}
+                fadeOutDown={fadeOutDown}>
+                    <FaThumbsDown />
+                </StyledIconBtnSpan>
             </StyledIconBtnDiv>
             <StyledTextSpan>Video ID</StyledTextSpan>
             <StyledInput onChange={(e) => setVideoId(e.target.value)} />
